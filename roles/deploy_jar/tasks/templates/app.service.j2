@@ -1,0 +1,12 @@
+[Unit]
+Description={{ service_name }} Java Application
+After=network.target
+
+[Service]
+User=ansible
+ExecStart={{ java_path }} -jar {{ deploy_dir }}/{{ artifactory_filename }}
+Restart=always
+Environment=JAVA_OPTS=-Xms256m -Xmx512m
+
+[Install]
+WantedBy=multi-user.target

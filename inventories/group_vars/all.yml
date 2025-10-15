@@ -1,0 +1,5 @@
+artifactory_url: "http://localhost:8081/artifactory/release-candidates-local"
+artifactory_repo_path: "com/example/demo"
+artifactory_filename: "demo-0.0.1-20251014.201034-1.jar"
+deploy_dir: "/opt/myapp"
+java_path: "/usr/bin/java"

@@ -1,0 +1,6 @@
+---
+- name: Déploiement de l'application JAR depuis Artifactory
+  hosts: all
+  become: yes
+  roles:
+    - deploy_jar
