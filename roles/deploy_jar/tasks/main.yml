@@ -1,31 +1,8 @@
----
-- name: Télécharger le fichier JAR depuis Artifactory
-  include_tasks: download.yml
-
-- name: Créer le répertoire de déploiement
-  file:
-    path: "{{ deploy_dir }}"
-    state: directory
-    mode: '0755'
-
-- name: Copier le JAR dans le répertoire de déploiement
-  copy:
-    src: "/tmp/{{ artifactory_filename }}"
-    dest: "{{ deploy_dir }}/{{ artifactory_filename }}"
-    mode: '0755'
-    remote_src: true
-
-- name: Créer le fichier de service systemd
-  template:
-    src: app.service.j2
-    dest: "/etc/systemd/system/{{ service_name }}.service"
-    mode: '0644'
-
-- name: Recharger systemd
-  command: systemctl daemon-reload
-
-- name: Redémarrer l'application
-  service:
-    name: "{{ service_name }}"
-    state: restarted
-    enabled: true
+- name: Télécharger l'application depuis Artifactory
+  get_url:
+    url: "{{ artifactory_url }}/{{ artifactory_repo_path }}/{{ artifactory_filename }}"
+    dest: "/tmp/{{ artifactory_filename }}"
+    url_username: "{{ artifactory_user }}"
+    url_password: "{{ artifactory_password }}"
+    force: yes
+    validate_certs: no

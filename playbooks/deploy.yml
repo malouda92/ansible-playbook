@@ -3,6 +3,35 @@
   hosts: all
   become: true
   become_method: sudo
-  become_user: root
-  roles:
-    - deploy_jar
+  become_user: ansible
+  tasks:
+    - name:
+      ansible.builtin.include_role:
+        name: deploy_jar
+
+    - name: Créer le répertoire de déploiement
+      file:
+        path: "{{ deploy_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Copier le JAR dans le répertoire de déploiement
+      copy:
+        src: "/tmp/{{ artifactory_filename }}"
+        dest: "{{ deploy_dir }}/{{ artifactory_filename }}"
+        mode: '0755'
+        remote_src: true
+
+    - name: Créer le fichier de service systemd
+      ansible.builtin.include_role:
+        name: create_systemd
+
+    - name: Recharger systemd
+      ansible.builtin.shell: "systemctl daemon-reload"
+
+    - name: Redémarrer l'application
+      service:
+        name: "{{ service_name }}"
+        state: restarted
+        enabled: true
+

@@ -1,9 +1,0 @@
----
-- name: Télécharger l'application depuis Artifactory
-  get_url:
-    url: "{{ artifactory_url }}/{{ artifactory_repo_path }}/{{ artifactory_filename }}"
-    dest: "/tmp/{{ artifactory_filename }}"
-    url_username: "{{ artifactory_user }}"
-    url_password: "{{ artifactory_password }}"
-    force: yes
-    validate_certs: no
