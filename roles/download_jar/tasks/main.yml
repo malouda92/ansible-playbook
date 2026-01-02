@@ -2,6 +2,8 @@
   ansible.builtin.get_url:
     url: "{{ package_manager_url }}/{{ artefact_repo_path }}/{{ version }}/{{ artefact_filename }}"
     dest: "/tmp/{{ artefact_filename }}"
+    owner: ansible
+    mode: '755'
     headers:
       Authorization: "Bearer {{ lookup('env', 'GITHUB_TOKEN') }}"
     force: yes
