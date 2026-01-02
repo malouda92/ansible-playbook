@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 User=ansible
-ExecStart={{ java_path }} -jar {{ deploy_dir }}/{{ artifactory_filename }}
+ExecStart={{ java_path }} -jar {{ deploy_dir }}/{{ artefact_filename }}
 Restart=always
 Environment=JAVA_OPTS=-Xms256m -Xmx512m
 
