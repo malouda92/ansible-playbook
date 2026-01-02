@@ -24,8 +24,14 @@
       ansible.builtin.copy:
         src: "/tmp/{{ artefact_filename }}"
         dest: "{{ deploy_dir }}/{{ artefact_filename }}"
+        owner: ansible
         mode: '0755'
         remote_src: true
+
+    - name: Suppression du fichier dans tmp
+      ansible.builtin.file:
+        path: "/tmp/{{ artefact_filename }}"
+        state: absent
 
     - name: Créer le fichier de service systemd
       ansible.builtin.include_role:
