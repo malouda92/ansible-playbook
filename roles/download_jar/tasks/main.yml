@@ -1,8 +1,8 @@
 - name: Télécharger l'application depuis Artifactory
   ansible.builtin.get_url:
-    url: "{{ artifactory_url }}/{{ artifactory_repo_path }}/{{ version }}/{{ artifactory_filename }}"
-    dest: "/tmp/{{ artifactory_filename }}"
-    url_username: "{{ artifactory_user }}"
-    url_password: "{{ artifactory_password }}"
+    url: "{{ package_manager_url }}/{{ artefact_repo_path }}/{{ version }}/{{ artefact_filename }}"
+    dest: "/tmp/{{ artefact_filename }}"
+    headers:
+      Authorization: "Bearer {{ github_token }}"
     force: yes
     validate_certs: no

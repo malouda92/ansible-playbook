@@ -22,8 +22,8 @@
 
     - name: Copier le JAR dans le répertoire de déploiement
       ansible.builtin.copy:
-        src: "/tmp/{{ artifactory_filename }}"
-        dest: "{{ deploy_dir }}/{{ artifactory_filename }}"
+        src: "/tmp/{{ artefact_filename }}"
+        dest: "{{ deploy_dir }}/{{ artefact_filename }}"
         mode: '0755'
         remote_src: true
 
