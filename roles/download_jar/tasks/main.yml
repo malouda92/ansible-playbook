@@ -3,6 +3,6 @@
     url: "{{ package_manager_url }}/{{ artefact_repo_path }}/{{ version }}/{{ artefact_filename }}"
     dest: "/tmp/{{ artefact_filename }}"
     headers:
-      Authorization: "Bearer {{ github_token }}"
+      Authorization: "Bearer {{ lookup('env', 'GITHUB_TOKEN') }}"
     force: yes
     validate_certs: no
